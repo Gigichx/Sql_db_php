@@ -52,7 +52,7 @@ $result = $conn->query("SELECT id, nome, email FROM utenti ORDER BY id ASC");
 <body class="bg-light p-4">
 
 <div class="container">
-    <h2 class="text-center mb-4">Gestione Utenti (MySQL + PHP)</h2>
+    <h2 class="text-center mb-4">Gestione Utenti</h2>
 
     <div class="card shadow p-4 mb-5">
         <h5 class="mb-3">Aggiungi nuovo utente</h5>
