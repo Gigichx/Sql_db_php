@@ -11,7 +11,6 @@ if ($conn->connect_error) {
     die("Connessione fallita: " . $conn->connect_error);
 }
 
-// Gestione dell'inserimento di un nuovo utente
 if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST["nome"]) && isset($_POST["email"])) {
     $nome = $_POST["nome"];
     $email = $_POST["email"];
@@ -28,7 +27,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST["nome"]) && isset($_POS
     }
 }
 
-// Gestione dell'eliminazione di un utente
 if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['azione']) && $_POST['azione'] == 'elimina') {
     $id = $_POST["id"];
     if ($id > 0) {
@@ -41,7 +39,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['azione']) && $_POST['a
     }
 }
 
-// Recupero degli utenti dal database
 $result = $conn->query("SELECT id, nome, email FROM utenti ORDER BY id ASC");
 ?>
 <!DOCTYPE html>
@@ -50,31 +47,32 @@ $result = $conn->query("SELECT id, nome, email FROM utenti ORDER BY id ASC");
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Gestione Utenti MySQL</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
 </head>
-<body>
+<body class="bg-light p-4">
 
-<div>
-    <h2>Gestione Utenti (MySQL + PHP)</h2>
+<div class="container">
+    <h2 class="text-center mb-4">Gestione Utenti (MySQL + PHP)</h2>
 
-    <div>
-        <h5>Aggiungi nuovo utente</h5>
-        <form method="POST">
-            <div>
-                <input type="text" name="nome" placeholder="Nome & Cognome" required>
+    <div class="card shadow p-4 mb-5">
+        <h5 class="mb-3">Aggiungi nuovo utente</h5>
+        <form method="POST" class="row g-3">
+            <div class="col-md-5">
+                <input type="text" name="nome" placeholder="Nome & Cognome" class="form-control" required>
             </div>
-            <div>
-                <input type="email" name="email" placeholder="Email" required>
+            <div class="col-md-5">
+                <input type="email" name="email" placeholder="Email" class="form-control" required>
             </div>
-            <div>
-                <button type="submit">Aggiungi</button>
+            <div class="col-md-2">
+                <button type="submit" class="btn btn-primary w-100">Aggiungi</button>
             </div>
         </form>
     </div>
 
-    <div>
-        <h5>Utenti registrati</h5>
-        <table border="1">
-            <thead>
+    <div class="card shadow p-4">
+        <h5 class="mb-3">Utenti registrati</h5>
+        <table class="table table-striped table-bordered text-center">
+            <thead class="table-dark">
                 <tr>
                     <th>ID</th>
                     <th>Nome</th>
@@ -91,10 +89,10 @@ $result = $conn->query("SELECT id, nome, email FROM utenti ORDER BY id ASC");
                                 <td>{$row['nome']}</td>
                                 <td>{$row['email']}</td>
                                  <td>
-                                    <form method='POST'>
+                                    <form method='POST' style='display:inline;'>
                                         <input type='hidden' name='azione' value='elimina'>
                                         <input type='hidden' name='id' value='{$row['id']}'>
-                                        <button type='submit'>Elimina</button>
+                                        <button type='submit' class='btn btn-danger btn-sm'>Elimina</button>
                                     </form>
                                 </td>
                               </tr>";
