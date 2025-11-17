@@ -4,11 +4,6 @@ $username = 'myuser';
 $password = 'mypassword';
 $database = 'myapp_db';
 
-echo $servername . "<br />";
-echo $username   . "<br />";
-echo $password   . "<br />";
-echo $database   . "<br />";
-
 $conn = new mysqli($servername, $username, $password, $database);
 
 if ($conn->connect_error) {
