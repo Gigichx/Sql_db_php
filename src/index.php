@@ -1,5 +1,4 @@
 <?php
-// Configurazione
 $servername = 'db';
 $username = 'myuser';
 $password = 'mypassword';
@@ -42,8 +41,9 @@ $sql = "CREATE TABLE IF NOT EXISTS anagrafica (
     cognome VARCHAR(100) NOT NULL,
     eta INT(6),
     citta VARCHAR(100),
-    reg_date TIMESTAMP
+    reg_date TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 )";
+
 
 if (!$conn->query($sql)) {
     echo "Error creating table anagrafica: " . $conn->error;
