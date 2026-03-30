@@ -24,8 +24,9 @@ $conn = new mysqli($servername, $username, $password, $database);
 if ($conn->connect_error) {
     die("Connessione fallita: " . $conn->connect_error);
 }
-$GROQ_API_KEY = "";
-$GROQ_MODEL   = "deepseek-r1-distill-llama-70b";
+
+$GROQ_API_KEY = "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";
+$GROQ_MODEL   = "qwen/qwen3-32b";
 
 $domanda  = "";
 $risposta = "";
@@ -87,3 +88,46 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
     }
 }
 ?>
+
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <title>Chat con Groq</title>
+</head>
+<body>
+ 
+<h1>Chatta con Groq AI</h1>
+<p>Modello in uso: <b><?php echo htmlspecialchars($GROQ_MODEL); ?></b></p>
+ 
+<form method="POST" action="">
+    <label for="domanda">La tua domanda:</label>
+    <br>
+    <input type="text" id="domanda" name="domanda" size="60"
+           value="<?php echo htmlspecialchars($domanda); ?>">
+    <br><br>
+    <input type="submit" value="Invia">
+</form>
+ 
+<?php if ($errore !== ""): ?>
+    <hr>
+    <p><b>Errore:</b> <?php echo htmlspecialchars($errore); ?></p>
+ 
+<?php elseif ($risposta !== ""): ?>
+    <hr>
+ 
+    <h2>La tua domanda</h2>
+    <p><?php echo nl2br(htmlspecialchars($domanda)); ?></p>
+ 
+    <?php if ($reasoning !== ""): ?>
+        <h2>Ragionamento del modello (Reasoning)</h2>
+        <p><?php echo nl2br(htmlspecialchars($reasoning)); ?></p>
+    <?php endif; ?>
+ 
+    <h2>Risposta del modello</h2>
+    <p><?php echo nl2br(htmlspecialchars($risposta)); ?></p>
+ 
+<?php endif; ?>
+ 
+</body>
+</html>
