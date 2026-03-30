@@ -24,7 +24,7 @@ $conn = new mysqli($servername, $username, $password, $database);
 if ($conn->connect_error) {
     die("Connessione fallita: " . $conn->connect_error);
 }
-$GROQ_API_KEY = "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";
+$GROQ_API_KEY = "";
 $GROQ_MODEL   = "deepseek-r1-distill-llama-70b";
 
 $domanda  = "";
